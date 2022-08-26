@@ -68,14 +68,14 @@ class TcpServerService : Service() {
 
     private fun startMeForeground() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val NOTIFICATION_CHANNEL_ID = packageName
+            val channelId = packageName
             val channelName = "Tcp Server Background Service"
-            val chan = NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE)
+            val chan = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE)
             chan.lightColor = Color.BLUE
             chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
             val manager = (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
             manager.createNotificationChannel(chan)
-            val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+            val notificationBuilder = NotificationCompat.Builder(this, channelId)
             val notification = notificationBuilder.setOngoing(true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Tcp Server is running in background")
